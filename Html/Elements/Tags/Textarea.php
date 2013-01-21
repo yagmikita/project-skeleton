@@ -1,7 +1,14 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+namespace Html\Elements\Tags;
+
+use Html\Elements\Skeletons as Skeletons;
+
+class Textarea extends Skeletons\HtmlElementContainer
+{
+    protected $_name = 'textarea';
+    protected $_defaultAttributes = array(
+        'cols' => '80',
+        'rows' => '20',
+    );    
+}

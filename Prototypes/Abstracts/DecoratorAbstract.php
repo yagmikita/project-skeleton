@@ -10,8 +10,7 @@ abstract class DecoratorAbstract implements I\DecoratorInterface
     use Traits\magicGet, Traits\magicSet;
     
     protected $_params;
-    protected $_decorators;
-    protected $_validators;
+    protected $_decoration;
     
     public function __construct(array $params)
     {

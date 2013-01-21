@@ -3,7 +3,7 @@
 namespace Prototypes\Abstracts;
 
 use Traits as T,
-    Prototypes\Interfaces as Intrf,
+    Prototypes\Interfaces as I,
     Application\Exceptions as error;
 
 abstract class HtmlElementAbstract implements Intrf\HtmlElementInterface
@@ -30,7 +30,7 @@ abstract class HtmlElementAbstract implements Intrf\HtmlElementInterface
      * 
      * @var type php array
      */
-    public $defaultAttributes = array();
+    protected $_defaultAttributes = array();
     
     /**
      * Represents the string pattern to be rendered by Prototypes\Interfaces\Renderable
@@ -70,17 +70,28 @@ abstract class HtmlElementAbstract implements Intrf\HtmlElementInterface
      */    
     protected $_validators;
     
+    /**
+     * Holds the last validation error list
+     * 
+     * @var type array
+     */
+    protected $_validationErrors = array();
     
+    /**
+     * 
+     * @param array $options
+     * @throws error\InvalidOptionsException
+     */
     public function __construct(array $options)
     {
         if (!self::areOptionsValid($options))
             throw new error\InvalidOptionsException();
         $attributes = isset($options['_attributes'])?$options['_attributes']:$this->__get('_defaultAttributes');
         $this->__set('_attributes', $attributes);
-        $decorator  = isset($options['_decorator'])?$options['_decorator']:null;
-        $this->setDecorator($decorator);
-        $validator  = isset($options['_validator'])?$options['_validator']:null;
-        $this->setValidator($validator);
+        $decorators  = isset($options['_decorators'])?$options['_decorators']:null;
+        $this->setDecorators($decorators);
+        $validators  = isset($options['_validators'])?$options['_validators']:null;
+        $this->setValidators($validators);
     }
     
     public static function areOptionsValid(array $a)
@@ -92,5 +103,88 @@ abstract class HtmlElementAbstract implements Intrf\HtmlElementInterface
                 return false;
         }
     }
-
+    
+    public function addValidator(I\ValidatorInterface $validator)
+    {
+        $validators = $this->__get('_validators');
+        array_push($validators, $validator);
+        $this->__set('_validators', $validators);
+    }
+    
+    public function getValidators()
+    {
+        return $this->__get('_validators');
+    }
+    
+    public function setValidators(array $validators)
+    {
+        $this->__set('_validators', $validators);
+    }
+    
+    public function hasValidators()
+    {
+        return count($this->__get('_validators'))?true:false;
+    }
+    
+    public function proceedValidation()
+    {
+        $manager = Validators\Manager\QueryValidatorsQueue($this->__get('_validators'));
+        if (!$manager->launchQueue($this->value())) {
+            $this->__set('_validationErrors', $value);
+            return false;
+        } else {
+            $this->__set('_validationErrors', array());
+            return true;            
+        }
+    }
+    
+    public function addDecorator(I\DecoratorInterface $decorator)
+    {
+        $decorators = $this->__get('_decorators');
+        array_push($decorators, $decorator);
+        $this->__set('_decorators', $decorators);
+    }
+    
+    public function getDecorators()
+    {
+        return $this->__get('_decorators');
+    }
+    
+    public function setDecorators(array $decorators)
+    {
+        $this->__set('_decorators', $decorators);
+    }
+    
+    public function hasDecorators()
+    {
+        return count($this->__get('_decorators'))?true:false;
+    }   
+    
+    public function applyDecorations($content)
+    {
+        foreach ($this->__get('_decorators') as $decorator) {
+            $content = $decorator->decorate($content);
+        }
+        return $content;
+    }
+    
+    public function renderAttributes()
+    {
+        $attrs = "";
+        foreach ($this->__get('_attributes') as $key => $value){
+            $attrs .= "{$key}='{$value}' ";
+        }
+        return $attrs;
+    }
+    
+    public function render()
+    {
+        return $this->applyDecorations($this->renderElement());
+    }
+    
+    public function getErrors()
+    {
+        return $this->__get('_validationErrors');
+    }
+    
 }

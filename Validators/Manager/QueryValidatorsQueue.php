@@ -10,7 +10,18 @@ class QueryValidatorsQueue
 {
     use T\magicGet, T\magicSet;
     
+    /**
+     * Validation queue
+     * 
+     * @var type array
+     */
     protected $_validators;
+    
+    /**
+     * The list of errors
+     * 
+     * @var type array
+     */
     protected $_errors = array();
     
     public function __construct(array $validators)
@@ -18,17 +29,27 @@ class QueryValidatorsQueue
         $this->__set('_validators', $validators);
     }
     
+    /**
+     * Holds the list of errors if they exist
+     * 
+     * @return type array
+     */
     public function getErrors()
     {
         return $this->__get('_errors');
     }
     
-    public function launchQueue()
+    /**
+     * Runs all the queued validators
+     * 
+     * @param type mixed $value
+     * @return type boolean
+     */
+    public function launchQueue($value)
     {
         $composer = new Manager\ValidatorComposer;  
         foreach ($this->__get('_validators') as $key => $validatorOpts) {           
             $name = $validatorOpts['name'];
-            $value = $validatorOpts['value'];
             $params = isset($validatorOpts['params'])?$validatorOpts['params']:array();            
             $initialized = $composer->init($name, $params);
             if (!$composer->validate($value)) {

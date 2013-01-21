@@ -13,7 +13,7 @@
 
 namespace Decorators\UI;
 
-use Prototypes\Abstracts as Abs,
+use Prototypes\Abstracts as A,
     Types;
 
 /**
@@ -26,7 +26,7 @@ use Prototypes\Abstracts as Abs,
  * @license  GNU GPL
  * @link     http://192.168.7.101/docs/decorators/ui/form/
  */
-class Form extends Abs\UIDecorator
+class Form extends A\UIDecorator
 {
     /**
      * Decorators constructor

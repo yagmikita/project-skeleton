@@ -1,7 +1,13 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+namespace Html\Elements\Tags;
+
+use Html\Elements\Skeletons as Skeletons;
+
+class Script extends Skeletons\HtmlElementContainer
+{
+    protected $_name = 'script';
+    protected $_defaultAttributes = array(
+        'type' => 'text/javascript'
+    );    
+}

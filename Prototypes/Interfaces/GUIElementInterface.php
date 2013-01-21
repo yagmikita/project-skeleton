@@ -2,6 +2,6 @@
 
 namespace Prototypes\Interfaces;
 
-interface GUIElementInterface extends \RenderableInterface, \DecorableInterface, \ValidableInterface
+interface GUIElementInterface extends \RenderableInterface, \HasDecoratorsInterface, \HasValidatorsInterface
 {
 }

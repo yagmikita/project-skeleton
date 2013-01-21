@@ -3,9 +3,10 @@
 namespace Types;
 
 use Traits,
+    Prototypes\Interfaces as I,
     Application\Exceptions as error;
 
-class String
+class String implements I\HasValueInterface
 {
     use Traits\magicGet, Traits\magicSet;
     

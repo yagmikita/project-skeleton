@@ -1,7 +1,10 @@
 <?php
 
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-?>
+namespace Html\Elements\Tags;
+
+use Html\Elements\Skeletons as Skeletons;
+
+class Table extends Skeletons\HtmlElementContainer
+{
+    protected $_name = 'table';
+}

@@ -2,7 +2,8 @@
 
 namespace Prototypes\Interfaces;
 
-interface HtmlElementInterface extends \GUIElementInterface
+interface HtmlElementInterface extends \GUIElementInterface, \HasValueInterface
 {
-    public function value();
+    public function renderElement();
+    public function renderAttributes();
 }
