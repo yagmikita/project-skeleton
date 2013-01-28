@@ -7,6 +7,9 @@ use Traits as T,
     Prototypes\Interfaces as I,
     Application\Exceptions as E;
 
+/**
+ * Implementation of String class, which is the wrapper of a string type
+ */
 class TString extends A\TypeAbstract implements I\HasLengthInterface, I\CanValidType
 {
     public function __construct($value)
@@ -25,10 +28,24 @@ class TString extends A\TypeAbstract implements I\HasLengthInterface, I\CanValid
     }    
     
     /**
+     * User Required Section
+     */
+    
+    /**
+     * Imitates explode behavior
+     * @param php string $separator
+     * @return \Types\Types\TArray
+     */
+    public function explode($separator = ' ')
+    {
+        return new Types\TArray(explode($separator, $this->__get('_value')));
+    }
+    
+    /**
      * Analog of vsprintf() function
      * 
      * @param array $subs
-     * @return PHP string
+     * @return php string
      */
     public function substitute(array $subs = array())
     {
@@ -37,9 +54,9 @@ class TString extends A\TypeAbstract implements I\HasLengthInterface, I\CanValid
     
     /**
      * Analog of substr() function
-     * @param type $from
-     * @param type $to
-     * @return PHP string
+     * @param int $from
+     * @param int $to
+     * @return php string
      */
     public function cut($from = null, $to = null)
     {
@@ -50,8 +67,8 @@ class TString extends A\TypeAbstract implements I\HasLengthInterface, I\CanValid
     
     /**
      * Converts the value to camel-case format
-     * @param type php string $separator
-     * @return type php string
+     * @param php string $separator
+     * @return php string
      */
     public function toCamelCase($separator = " ")
     {
@@ -67,11 +84,12 @@ class TString extends A\TypeAbstract implements I\HasLengthInterface, I\CanValid
     
     /**
      * Symlink to $this->toCamelCase()
-     * @param type php string $separator
+     * @param php string $separator
+     * @return php string
      */
     public function camelCase($separator = " ")
     {
-        $this->toCamelCase($separator);
+        return $this->toCamelCase($separator);
     }
     
 }

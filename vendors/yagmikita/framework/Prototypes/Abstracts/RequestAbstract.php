@@ -2,7 +2,8 @@
 
 namespace Prototypes\Abstracts;
 
-use Traits as T,
+use Types,
+    Traits as T,
     Prototypes\Interfaces as I;
 
 abstract class RequestAbstract implements I\RequestInterface
@@ -11,10 +12,18 @@ abstract class RequestAbstract implements I\RequestInterface
     
     protected $_type;
     protected $_params;
+    protected $_method;
+    protected $_location;
+    protected $_referrer;
+    protected $_controller;
+    protected $_action;
     
     public function __construct()
     {
         $this->__set('_params', $_REQUEST);
+        $this->__set('_location', $_SERVER['REQUEST_URI']);
+        $this->__set('_method', $_SERVER['REQUESTED_METHOD']);
+        $this->__set('_referrer', $_SERVER['HTTP_REFERER']);
     }
     
     public function getParam($key, $default = '')
@@ -32,7 +41,12 @@ abstract class RequestAbstract implements I\RequestInterface
     
     public function isPostRequest()
     {
-        return count($_POST)>0?true:false;
+        return $this->__get('_method');;
+    }
+    
+    public function dispatchRequest()
+    {
+        $reqs = new Types\TArray(explode('/', $this->__get('_request')));
     }
     
 }

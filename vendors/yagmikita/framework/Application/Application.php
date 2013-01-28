@@ -2,12 +2,12 @@
 
 namespace Application;
 
-use Application\Exceptions,
-    Traits;
+use Application\Exceptions As E,
+    Traits as T;
 
 class Application extends stdClass
 {
-    use Traits\magicGet, Traits\magicSet;
+    use T\magicGet, T\magicSet;
     
     /**
      * array of application configs, converted to stdClass
@@ -47,7 +47,8 @@ class Application extends stdClass
     {
         self::constants($constants);
         $this->configure($this->getConfigs());
-        $this->dispatchRequest($request);
+        $this->__set('_request', $request);
+        $this->__get('_request')->dispatchRequest();
     }
     
     protected function getConfigs()
@@ -91,11 +92,6 @@ class Application extends stdClass
             $platform = 'windows';
         }
         return $platform;
-    }
-    
-    protected function dispatchRequest(\Request $request)
-    {
-        
     }
     
 }
