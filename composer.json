@@ -1,10 +1,24 @@
 {
-    "psr-0": {
-        "Application": "src"
-    },
+    "name": "yagmikita/framework",
+    "type": "library",
+    "keywords": [
+        "framework"
+    ],
+    "authors": [
+        {"name": "Gopkalo Nikita", "email": "yagmikita@gmail.com"}
+    ],
     "require": {
-        "php": ">=5.4.6",
-        "yagmikita/framework": "0.*",
-        "doctrine/orm": "*"
+        "php": ">=5.4",
+        "doctrine/common": ">=2.1",
+        "doctrine/orm": "*",
+        "phpunit/PHPUnit": "3.7.*"
     },
+    "autoload": {
+        "psr-0": [
+            {"Application\\": "src/"}
+        ]
+    },
+    "extra": {
+        "branch-alias": {"dev-master": "1.0-dev"}
+    }
 }
