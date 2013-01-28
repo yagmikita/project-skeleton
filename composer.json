@@ -5,7 +5,11 @@
         "framework"
     ],
     "authors": [
-        {"name": "Gopkalo Nikita", "email": "yagmikita@gmail.com"}
+        {
+            "name": "Gopkalo Nikita",
+            "email": "yagmikita@gmail.com",
+            "role": "Developer"
+        }
     ],
     "require": {
         "php": ">=5.4",
@@ -14,11 +18,8 @@
         "phpunit/PHPUnit": "3.7.*"
     },
     "autoload": {
-        "psr-0": [
-            {"Application\\": "src/"}
-        ]
-    },
-    "extra": {
-        "branch-alias": {"dev-master": "1.0-dev"}
+        "psr-0": {
+            "Application\\": "src/"
+        }
     }
 }
