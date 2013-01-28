@@ -1,0 +1,10 @@
+{
+    "psr-0": {
+        "Application": "src"
+    },
+    "require": {
+        "php": ">=5.4.6",
+        "yagmikita/framework": "0.*",
+        "doctrine/orm": "*"
+    },
+}

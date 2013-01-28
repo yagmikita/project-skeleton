@@ -1,16 +1,18 @@
 <?php
 
-date_default_timezone_set('Europe/Kiev');
+require_once(__DIR__ . '/autoloader.php');
 
-defined('DIRECTORY_SEPARATOR') or define('DIRECTORY_SEPARATOR', '/');
-defined('APP_PATH') or define('APP_PATH', __DIR__);
-defined('CLASS_PARAM_IS_NOT_SET') || define('CLASS_PARAM_IS_NOT_SET', 'The parameter "%s" you are trying to access is not presenter in the class "%s".');
-defined('DEBUG_MODE') or define('DEBUG_MODE', false);
+/**
+ * Uncomment this if Windows platform is used
+ * require_once(__DIR__ . '\autoloader.php');
+ */
 
-require_once(APP_PATH . DIRECTORY_SEPARATOR. 'AutoloaderPSR0.php');
+spl_autoload_register('Autoloader::autoload');
 
-spl_autoload_register('AutoloaderPSR0::autoload');
-
-use \Types;
-
-$request = new \Application\Request\Request;
+$app = new \Application\Application(
+    new \Application\Request,
+    array(
+        array('name' => 'APP_ENV', 'value' => 'development')
+    )
+);
+$app->run();
