@@ -1,6 +1,5 @@
 <?php
 
-// Composers' autoloading
 $autoloaderPath = realpath(__DIR__.'/vendor/autoload.php');
 
 if (!file_exists($autoloaderPath))
