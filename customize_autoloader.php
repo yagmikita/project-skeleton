@@ -1,15 +1,18 @@
 <?php
 
 // Composers' autoloading
-if (file_exists('vendor/autoload.php')) {
-    $loader = include 'vendor/autoload.php';
+$autoloaderPath = realpath(__DIR__.'/vendor/autoload.php');
+
+if (file_exists($autoloaderPath)) {
+    $loader = include $autoloaderPath;
 }
 
-$libPath = 'vendor/yagmikita/framework';
+$libPath = realpath(__DIR__.'/vendor/yagmikita/framework/');
 
-if (is_dir('vendor/yagmikita/framework')) {
+if (is_dir($libPath)) {
     if (isset($loader)) {
         $loader->add('NG', $libPath);
+        //var_dump($loader);exit;
     } else {
         throw new Exception('No autoloader instance is found', 500);
     }
