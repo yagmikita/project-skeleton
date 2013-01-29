@@ -1,7 +1,0 @@
-<phpunit bootstrap="./bootstrap.php" colors="true">
-    <testsuites>
-        <testsuite name="yagmikita/framework test suite">
-            <directory>./Library</directory>
-        </testsuite>
-    </testsuites>
-</phpunit>

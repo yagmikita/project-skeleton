@@ -1,8 +1,9 @@
 {
-    "name": "yagmikita/framework",
-    "type": "library",
+    "name": "yagmikita/projectSkeleton",
+    "type": "application",
     "keywords": [
-        "framework"
+        "application",
+        "skeleton"
     ],
     "authors": [
         {
