@@ -1,0 +1,21 @@
+<?php
+
+return array(
+    'common' => array(
+        'title' => 'Application',
+        'time_zone' => 'Europe/Kiev',
+        'debug' => false,
+    ),
+    'components' => array(
+        'doctrine' => array(
+            'driver'   => 'pdo_mysql',
+            'username' => 'root',
+            'password' => 'root',
+            'charset'  => 'utf8',
+            'dsn' => 'mysql:host=localhost;port=3306;dbname=app_db_dev'
+        ),
+    ),
+    'populate' => array(
+
+    )
+);
